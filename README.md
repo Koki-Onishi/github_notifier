@@ -6,12 +6,14 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+2.5.3
 
 * System dependencies
 
 * Configuration
 
 * Database creation
+bundle exec rake db:migrate
 
 * Database initialization
 
