@@ -1,0 +1,84 @@
+link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"
+h1.text-center Github Notifier
+div.col-md-6.offset-md-3
+  ul.nav.nav-tabs
+    li.nav-item
+      a.nav-link.active href="#tab1" data-toggle="tab" issues
+    li.nav-item
+      a.nav-link href="#tab2" data-toggle="tab" pull requests
+
+  div.tab-content
+    div#tab1.tab-pane.border.active
+      table.table.table-bordered.table-hover
+        |   
+        thead
+          |     
+          tr
+            |       
+            td issues
+            |     
+          |   
+        |   
+        tbody
+          - @issues.each do |issue|
+            tr
+              td = link_to "#{issue.title}", "#{issue.html_url}", target:'_blank', rel:'noopener noreferrer'
+    div#tab2.tab-pane.border
+      table.table.table-bordered.table-hover
+        |   
+        thead
+          |     
+          tr
+            |       
+            td pull requests
+            |     
+          |   
+        |   
+        tbody
+          - @pull_requests.each do |pull_requests|
+            tr
+              td = link_to "#{pull_requests.title}", "#{pull_requests.html_url}", target: '_blank'
+  = link_to 'Log out', log_out_path
+
+script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"
+script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"
+script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"
+javascript:
+  function push(message) {
+    Push.create(message,
+      {
+        body: message,
+        timeout: 8000,
+        onClick: function () {
+          this.close();
+        }
+      })
+  }
+
+  function get_new_issues() {
+    $.ajax({
+      url: "#{new_issues_path}",
+      type: 'POST',
+    }).then(
+      function (response) {
+        if (response.result) {
+          if (response.issue != '') {
+            push(response.issue);
+          }
+          if (response.issue != '') {
+            push(response.pull_request);
+          }
+          location.reload();
+        }
+      },
+      function (error) {
+        console.log('エラーが発生しました');
+      }
+    );
+  }
+
+  $(function () {
+    setInterval(function () {
+      get_new_issues();
+    }, 10000);
+  });

@@ -1,0 +1,24 @@
+link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"
+h1.text-center Sign in
+div.col-md-6.offset-md-3
+  - flash.each do |name, msg|
+    - if msg.is_a?(String)
+      div.alert.alert-warning role="alert"
+        = msg
+div.row
+  div.col-md-6.offset-md-3
+    = form_for(:session, url: log_in_path) do |f|
+      div.form-group
+        = f.label :email, for: 'email'
+        = f.email_field :email, class: 'form-control', id: 'email'
+      div.form-group
+        = f.label :password, for: 'password'
+        = f.password_field :password, class: 'form-control', id: 'password'
+
+      button.btn.btn-primary type="submit" Log in
+
+    p New user? #{link_to "Sign up", sign_up_path}
+
+script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"
+script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"
+javascript:
