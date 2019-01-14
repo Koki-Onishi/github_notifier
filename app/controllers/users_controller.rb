@@ -16,6 +16,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if  current_user.update(user_params)
+      flash[:success] = 'ユーザ情報を変更しました'
+      redirect_to root_path
+    else
+      flash[:warning] = '入力が不正です'
+      redirect_to edit_path
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :github_token)
