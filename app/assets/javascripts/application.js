@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require rails-ujs
+//= require popper
+//= require bootstrap-material-design
 // require activestorage
 // require turbolinks ./
 $(document).ready(function () {

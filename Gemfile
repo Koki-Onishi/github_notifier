@@ -40,9 +40,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'slim-rails'
 gem 'jquery-rails'
 
-gem 'bootstrap-sass'
-# gem 'bootstrap-material-design'
-
 gem 'octokit'
 
 group :development, :test do
