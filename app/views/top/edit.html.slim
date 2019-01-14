@@ -1,12 +1,12 @@
-h1.text-center Sign Up
-div.col-md-6.offset-md-3
+=render 'layouts/header'
+h1.text-center ユーザ情報編集
 div.col-md-6.offset-md-3
   - flash.each do |name, msg|
     - if msg.is_a?(String)
       div.alert class="alert-#{name}" role="alert"
         = msg
 div.col-md-6.offset-md-3
-  = form_for(@user) do |f|
+  = form_for(current_user) do |f|
     div.form-group
       = f.label :email, for: 'email'
       = f.email_field :email, class: 'form-control', id: 'email', placeholder:'email@example.com'
@@ -20,4 +20,4 @@ div.col-md-6.offset-md-3
       = f.label :github_token, 'Github Token', for: 'github-token'
       = f.text_field :github_token, class: 'form-control', id: 'github-token', placeholder:'githubのPersonal access tokenを入力してください'
 
-    button.btn.btn-primary type="submit" Create my account
+    button.btn.btn-primary type="submit" Edit my account

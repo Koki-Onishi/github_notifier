@@ -1,4 +1,10 @@
+= render 'layouts/header'
 h1.text-center Github Notifier
+div.col-md-6.offset-md-3
+  - flash.each do |name, msg|
+    - if msg.is_a?(String)
+      div.alert class="alert-#{name}" role="alert"
+        = msg
 div.col-md-6.offset-md-3
   ul.nav.nav-tabs
     li.nav-item
@@ -37,7 +43,6 @@ div.col-md-6.offset-md-3
           - @pull_requests.each do |pull_requests|
             tr
               td = link_to "#{pull_requests.title}", "#{pull_requests.html_url}", target: '_blank'
-  = link_to 'Log out', log_out_path
 
 script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"
 javascript:

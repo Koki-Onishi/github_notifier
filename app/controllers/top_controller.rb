@@ -1,5 +1,6 @@
 class TopController < ApplicationController
-  before_action :require_login, :set_client, :get_issues
+  before_action :require_login
+  before_action :set_client, :get_issues, only: [:show, :new_issues]
 
   def show
     @issues = @assigned_issues
