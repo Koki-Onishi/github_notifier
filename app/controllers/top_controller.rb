@@ -29,7 +29,7 @@ class TopController < ApplicationController
       break if is_new_pull_request
     end
 
-    render(json: { result: true, issue: new_issue, pull_request: new_pull_request }) && return if new_issue.present? || new_pull_request.present?
+    render json: { result: true, issue: new_issue, pull_request: new_pull_request } and return if new_issue.present? || new_pull_request.present?
     render json: { result: false }
   end
 
