@@ -1,0 +1,69 @@
+---
+AllCops:
+  DisplayCopNames: yes
+  TargetRubyVersion: 2.5.3
+  Exclude:
+    - "bin/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "vendor/bundle/**/*"
+
+Rails:
+  Enabled: true
+
+Lint/UnusedMethodArgument:
+  Exclude:
+    - 'app/backends/jobcan/base/*'
+
+Metrics/LineLength:
+  Enabled: false
+
+StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+AccessorMethodName:
+  Enabled: false
+
+ClassAndModuleChildren:
+  Enabled: false
