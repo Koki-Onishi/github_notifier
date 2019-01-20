@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveViewedAtFromUsers < ActiveRecord::Migration[5.2]
   def change
     remove_column :users, :issue_viewed_at, :time

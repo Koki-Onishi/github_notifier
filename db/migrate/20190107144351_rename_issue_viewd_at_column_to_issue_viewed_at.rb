@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RenameIssueViewdAtColumnToIssueViewedAt < ActiveRecord::Migration[5.2]
   def change
     rename_column :users, :issue_viewd_at, :issue_viewed_at

@@ -25,7 +25,7 @@ div.col-md-6.offset-md-3
           |   
         |   
         tbody
-          - @issues.each do |issue|
+          - @assigned_issues.each do |issue|
             tr
               td = link_to "#{issue.title}", "#{issue.html_url}", target:'_blank', rel:'noopener noreferrer'
     div#tab2.tab-pane.border
@@ -40,9 +40,9 @@ div.col-md-6.offset-md-3
           |   
         |   
         tbody
-          - @pull_requests.each do |pull_requests|
+          - @pull_requests.each do |pull_request|
             tr
-              td = link_to "#{pull_requests.title}", "#{pull_requests.html_url}", target: '_blank'
+              td = link_to "#{pull_request.title}", "#{pull_request.html_url}", target: '_blank', rel:'noopener noreferrer'
 
 script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"
 javascript:
