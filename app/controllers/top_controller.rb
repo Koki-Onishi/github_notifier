@@ -2,9 +2,24 @@
 
 class TopController < ApplicationController
   before_action :require_login
-  before_action :set_client, :issues, only: %i[show new_issues]
+  before_action :issues, only: %i[show]
+  before_action :set_client, :issues, only: %i[new_issues]
 
-  def show; end
+  def show
+    is_token_valid = github_token_valid(current_user.github_token)
+    unless is_token_valid == :valid
+      if is_token_valid == :no_repo
+        flash.now[:warning] = 'アクセストークンのscopeにrepoを入れてください'
+        render('top/edit') && return
+      elsif is_token_valid == :invalid
+        flash.now[:warning] = 'アクセストークンが不正です'
+        render('top/edit') && return
+      end
+    end
+
+    set_client
+    issues
+  end
 
   def new_issues
     new_assigned_issue = new_issue(@assigned_issues, 'issue')
