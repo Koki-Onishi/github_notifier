@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    is_token_valid = github_token_valid?
+    is_token_valid = github_token_valid(user_params[:github_token])
     unless is_token_valid == :valid
       if is_token_valid == :no_repo
         flash.now[:warning] = 'アクセストークンのscopeにrepoを入れてください'
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    is_token_valid = github_token_valid?
+    is_token_valid = github_token_valid(user_params[:github_token])
     unless is_token_valid == :valid
       if is_token_valid == :no_repo
         flash.now[:warning] = 'アクセストークンのscopeにrepoを入れてください'
@@ -57,15 +57,5 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :github_token)
-  end
-
-  def github_token_valid?
-    # トークンを検証し、トークンが認証されているか、トークンにリポジトリの読み取り権限があるかどうかを確認する
-    client = Octokit::Client.new access_token: user_params[:github_token]
-    return :valid if client.scopes(user_params[:github_token]).include?('repo')
-
-    :no_repo
-  rescue Octokit::Unauthorized
-    :invalid
   end
 end
