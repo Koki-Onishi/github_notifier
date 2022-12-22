@@ -19,7 +19,3 @@ $ bundle i --path vendor/bundle
 $ bundle exec rake db:migrate
 $ bundle exec rails c
 ```
-
-## Demo
-デモページのリンクです。Heroku上で動作しています。  
-[デモページ](https://github-notifier-koki.herokuapp.com/)
